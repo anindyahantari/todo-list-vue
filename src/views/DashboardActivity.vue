@@ -26,11 +26,11 @@
                     </router-link>
                     <div class="card-footer">
                         <h6 data-cy="activity-item-date"> {{ formatDate(activity.created_at) }} </h6>
-                        <b-button data-cy="activity-item-delete-button" type="button" v-b-modal="'modal-delete-' + activity.id"> <b-icon-trash></b-icon-trash> </b-button>
+                        <div data-cy="activity-item-delete-button" type="button" v-b-modal="'modal-delete-' + activity.id"> <b-icon-trash></b-icon-trash> </div>
                     </div>
                 </div>
 
-                 <!-- The delete activity modal -->
+                 <!-- THE DELETE ACTIVITY MODAL -->
                 <b-modal data-cy="modal-delete" :id="'modal-delete-' + activity.id" hide-header hide-footer centered>
                     <img data-cy="modal-delete-icon" src="../assets/warning.png" />
                     <h5 data-cy="modal-delete-title">Apakah anda yakin menghapus activity <strong>"{{ activity.title }}"</strong> ? </h5>
@@ -187,20 +187,10 @@ export default {
     line-height: 21px;
 }
 
-[data-cy="activity-item-delete"] {
+[data-cy="activity-item-delete-button"] {
     color: #888888;
-}
-
-[data-cy="activity-item-delete"] {
-    background: unset;
-    border: unset;
-    font-size: 14px;
+    font-size: 18px;
     padding: 0;
-}
-
-[data-cy="activity-item-delete"]:hover {
-    background: unset;
-    color: #888888;
 }
 
 [data-cy="modal-delete"] {
