@@ -32,7 +32,13 @@ button {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px !important;
+  }
 }
 
 </style>

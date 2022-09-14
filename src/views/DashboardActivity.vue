@@ -4,18 +4,18 @@
             <h4 data-cy="activity-title">
                 Activity
             </h4>
-            <b-button class="btn btn-primary" data-cy="activity-add-button">
+            <b-button class="btn btn-primary" data-cy="activity-add-button" @click="createNewActivity()">
                 <b-icon-plus></b-icon-plus>
                 Tambah
             </b-button>
         </div>
 
-        <div data-cy="activity-empty-state" v-if="activities.length < 1">
-            <img src="../assets/activity-empty-state.png" />
+        <div data-cy="activity-empty-state" v-if="isEmpty" @click="createNewActivity()">
+            <img data-cy="activity-empty-state" src="../assets/activity-empty-state.png" />
         </div>
         
-        <b-row v-else>
-            <b-col cols="3" v-for="(activity,index) in activities" :key="index" :data-cy="'activity-item-' +index" >
+        <b-row>
+            <b-col cols="6" md="3"  v-for="(activity,index) in activities" :key="index" :data-cy="'activity-item-' +index" >
                 <div class="card">
                     <router-link :to="'/detail/'+ activity.id">
                         <div class="card-body">
@@ -26,27 +26,23 @@
                     </router-link>
                     <div class="card-footer">
                         <h6 data-cy="activity-item-date"> {{ formatDate(activity.created_at) }} </h6>
-                        <b-button data-cy="activity-item-delete" type="button" v-b-modal="'my-modal-' + activity.id"> <b-icon-trash></b-icon-trash> </b-button>
+                        <b-button data-cy="activity-item-delete" type="button" v-b-modal="'modal-delete-' + activity.id"> <b-icon-trash></b-icon-trash> </b-button>
                     </div>
                 </div>
 
-                 <!-- The modal -->
-                <b-modal data-cy="modal-delete" :id="'my-modal-' + activity.id" hide-header hide-footer>
+                 <!-- The delete activity modal -->
+                <b-modal data-cy="modal-delete" :id="'modal-delete-' + activity.id" hide-header hide-footer centered>
                     <img data-cy="modal-delete-icon" src="../assets/warning.png" />
                     <h5 data-cy="modal-delete-title">Apakah anda yakin menghapus activity <strong>"{{ activity.title }}"</strong> ? </h5>
                     <div class="modal-buttons">
-                        <b-button data-cy="modal-delete-cancel-button" @click="$bvModal.hide('my-modal-' + activity.id)"> Batal </b-button>
+                        <b-button data-cy="modal-delete-cancel-button" @click="$bvModal.hide('modal-delete-' + activity.id)"> Batal </b-button>
                         <b-button data-cy="modal-delete-confirm-button" @click="deleteActivity(activity.id)"> Hapus </b-button>
                     </div>          
                 </b-modal>
-
             </b-col>
         </b-row>
 
-        <b-modal :show="showAlert" data-cy="modal-information" id="modal-information" hide-header hide-footer>
-            <img data-cy="modal-information-icon" src="../assets/warning.png" width="24" height="24" />
-            <span data-cy="modal-information-title"> Activity berhasil dihapus</span>
-        </b-modal>
+        <InformationModal />
 
     </div>
 </template>
@@ -54,39 +50,65 @@
 <script>
 
 import axios from 'axios'
+import InformationModal from "../components/InformationModal.vue"
 
 export default {
     name: "DashboardActivity",
+    components: {
+        InformationModal
+    },
     data() {
         return {
             activities: [],
-            showAlert: true,
+            form: {
+                "title": "New Activity",
+                "email": "ini@email.com"
+            },
+            isEmpty: undefined,
         }
     },
-    mounted() {
+    async mounted() {
         this.getActivities();
     },
     methods: {
         async getActivities() {
-            const response = await axios.get('https://todo.api.devcode.gethired.id/activity-groups');
+            const response = await axios.get('https://todo.api.devcode.gethired.id/activity-groups?email=ini@email.com');
             this.activities = response.data.data;
+
+            if(this.activities.length < 1) {
+                this.isEmpty = true;
+            } else {
+                this.isEmpty = false;
+            }
         },
-        formatDate(datetime) {
-            const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-            let date = new Date(datetime);
-            return `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
+
+        async createNewActivity() {
+            try {
+                await axios.post('https://todo.api.devcode.gethired.id/activity-groups?email=ini@email.com', this.form);
+                this.getActivities();
+
+            } catch (error) {
+                console.log(error)
+            }
         },
+
         async deleteActivity(id) {
             const response = await axios.delete('https://todo.api.devcode.gethired.id/activity-groups/' + id);
 
             if(response.status == 200 ) {
-                this.$bvModal.hide('my-modal-' + id);
+                this.$bvModal.hide('modal-delete-' + id);
     
                 this.getActivities();
 
                 this.$bvModal.show('modal-information');
             }
 
+        },
+
+        formatDate(datetime) {
+            const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            let date = new Date(datetime);
+            return `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
         }
     }
 }
@@ -121,6 +143,7 @@ export default {
 }
 
 [data-cy="activity-empty-state"] img {
+    cursor: pointer;
     display: block;
     margin: 0 auto;
     max-width: 767px;
@@ -208,14 +231,5 @@ export default {
     background: #ED4C5C;
     color: #FFFFFF;
 }
-
-[data-cy="modal-information-title"]  {
-    color: #111111;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 150%;
-    margin-left: 24px;
-}
-
 
 </style>
