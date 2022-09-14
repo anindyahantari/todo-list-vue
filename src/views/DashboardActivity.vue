@@ -15,7 +15,7 @@
         </div>
         
         <b-row>
-            <b-col cols="6" md="3"  v-for="(activity,index) in activities" :key="index" :data-cy="'activity-item-' +index" >
+            <b-col cols="6" md="3"  v-for="(activity,index) in activities" :key="index" data-cy="activity-item" >
                 <div class="card">
                     <router-link :to="'/detail/'+ activity.id">
                         <div class="card-body">
@@ -26,7 +26,7 @@
                     </router-link>
                     <div class="card-footer">
                         <h6 data-cy="activity-item-date"> {{ formatDate(activity.created_at) }} </h6>
-                        <b-button data-cy="activity-item-delete" type="button" v-b-modal="'modal-delete-' + activity.id"> <b-icon-trash></b-icon-trash> </b-button>
+                        <b-button data-cy="activity-item-delete-button" type="button" v-b-modal="'modal-delete-' + activity.id"> <b-icon-trash></b-icon-trash> </b-button>
                     </div>
                 </div>
 
