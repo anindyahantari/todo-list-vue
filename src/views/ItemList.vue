@@ -100,7 +100,7 @@
                                     data-cy="todo-item-title-edit-input" 
                                     @keydown.enter="editTodoItemTitle(todoItem.id, index)" 
                                 ></b-form-input>
-                                <p v-else data-cy="todo-item-title" :class="{ done: !todoItem.is_active }" @click.prevent="editTodoItemTitle(todoItem.id, index)">
+                                <p v-else data-cy="todo-title" :class="{ done: !todoItem.is_active }" @click.prevent="editTodoItemTitle(todoItem.id, index)">
                                     {{ todoItem.title }} 
                                 </p>
                                 <span data-cy="todo-title-edit-button"  @click.prevent="editTodoItemTitle(todoItem.id, index)"><b-icon-pencil></b-icon-pencil></span>
@@ -153,23 +153,23 @@
                         <span data-cy="modal-add-priority-item"> {{ priority.text }}</span>
                     </template>
 
-                    <b-dropdown-item data-cy="modal-add-priority-very-high" @click="getPriorityValue('very-high', 'Very High')">
+                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('very-high', 'Very High')">
                         <span class="priority-indicator very-high"></span>
                         Very High
                     </b-dropdown-item>
-                    <b-dropdown-item  data-cy="modal-add-priority-high" @click="getPriorityValue('high', 'High')">
+                    <b-dropdown-item  data-cy="modal-add-priority-item" @click="getPriorityValue('high', 'High')">
                         <span class="priority-indicator high"></span>
                         High
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="modal-add-priority-medium" @click="getPriorityValue('normal', 'Medium')">
+                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('normal', 'Medium')">
                         <span class="priority-indicator normal"></span>
                         Medium
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="modal-add-priority-low" @click="getPriorityValue('low', 'Low')">
+                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('low', 'Low')">
                         <span class="priority-indicator low"></span>
                         Low
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="modal-add-priority-very-low" @click="getPriorityValue('very-low', 'Very Low')">
+                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('very-low', 'Very Low')">
                         <span class="priority-indicator very-low"></span>
                         Very Low
                     </b-dropdown-item>
@@ -329,7 +329,7 @@ export default {
             this.priority.value = "very-high";
         },
 
-        sortLastest() {
+        sortOldest() {
             this.todoItems.sort(( a, b) => {
                 if (a.id < b.id)
                     return -1;
@@ -340,7 +340,7 @@ export default {
             return this.items;
         },
 
-        sortOldest() {
+        sortLastest() {
            this.todoItems.sort(( a, b) => {
                 if (a.id > b.id)
                     return -1;
@@ -359,6 +359,8 @@ export default {
                     return 1;
                 return 0;
             })
+
+            console.log(this.todoItems);
             
             return this.todoItems;
         },
