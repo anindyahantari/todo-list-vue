@@ -153,23 +153,23 @@
                         <span data-cy="modal-add-priority-item"> {{ priority.text }}</span>
                     </template>
 
-                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('very-high', 'Very High')">
+                    <b-dropdown-item data-cy="modal-add-priority-item-1" @click="getPriorityValue('very-high', 'Very High')">
                         <span class="priority-indicator very-high"></span>
                         Very High
                     </b-dropdown-item>
-                    <b-dropdown-item  data-cy="modal-add-priority-item" @click="getPriorityValue('high', 'High')">
+                    <b-dropdown-item  data-cy="modal-add-priority-item-2" @click="getPriorityValue('high', 'High')">
                         <span class="priority-indicator high"></span>
                         High
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('normal', 'Medium')">
+                    <b-dropdown-item data-cy="modal-add-priority-item-3" @click="getPriorityValue('normal', 'Medium')">
                         <span class="priority-indicator normal"></span>
                         Medium
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('low', 'Low')">
+                    <b-dropdown-item data-cy="modal-add-priority-item-4" @click="getPriorityValue('low', 'Low')">
                         <span class="priority-indicator low"></span>
                         Low
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('very-low', 'Very Low')">
+                    <b-dropdown-item data-cy="modal-add-priority-item-5" @click="getPriorityValue('very-low', 'Very Low')">
                         <span class="priority-indicator very-low"></span>
                         Very Low
                     </b-dropdown-item>
