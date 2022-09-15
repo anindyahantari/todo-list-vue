@@ -32,23 +32,23 @@
                         <span><b-icon-arrow-down-up></b-icon-arrow-down-up></span>
                     </template>
 
-                    <b-dropdown-item data-cy="sort-latest" @click="sortLastest()">
+                    <b-dropdown-item data-cy="sort-selection" @click="sortLastest()">
                         <b-icon-sort-down></b-icon-sort-down>
                         Terbaru
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="sort-oldest" @click="sortOldest()">
+                    <b-dropdown-item data-cy="sort-selection" @click="sortOldest()">
                         <b-icon-sort-up></b-icon-sort-up>
                         Terlama
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="sort-az" @click="sortAZ()">
+                    <b-dropdown-item data-cy="sort-selection" @click="sortAZ()">
                         <b-icon-sort-alpha-down></b-icon-sort-alpha-down>
                         A-Z
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="sort-za" @click="sortZA()">
+                    <b-dropdown-item data-cy="sort-selection" @click="sortZA()">
                         <b-icon-sort-alpha-up></b-icon-sort-alpha-up>
                         Z-A
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="sort-unfinished" @click="sortUnfinished()">
+                    <b-dropdown-item data-cy="sort-selection" @click="sortUnfinished()">
                         <b-icon-arrow-down-up></b-icon-arrow-down-up>
                         Belum Selesai
                     </b-dropdown-item>
@@ -183,6 +183,8 @@
             </template>
 
         </b-modal>
+
+        <InformationModal />
     
     </div>
 </template>
@@ -190,8 +192,12 @@
 <script>
 
 import axios from 'axios'
+import InformationModal from "../components/InformationModal.vue"
 
 export default {
+    components: {
+        InformationModal
+    },
     data() {
         return {
             activity: {},
@@ -279,6 +285,8 @@ export default {
                 this.$bvModal.hide('modal-delete-' + id);
     
                 this.getTodoItems();
+
+                this.$bvModal.show('modal-information');
             }
 
         },
