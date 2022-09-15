@@ -100,7 +100,7 @@
                                     data-cy="todo-item-title-edit-input" 
                                     @keydown.enter="editTodoItemTitle(todoItem.id, index)" 
                                 ></b-form-input>
-                                <p v-else data-cy="todo-title" :class="{ done: !todoItem.is_active }" @click.prevent="editTodoItemTitle(todoItem.id, index)">
+                                <p v-else class="todo-item-title" data-cy="todo-title" :class="{ done: !todoItem.is_active }" @click.prevent="editTodoItemTitle(todoItem.id, index)">
                                     {{ todoItem.title }} 
                                 </p>
                                 <span data-cy="todo-title-edit-button"  @click.prevent="editTodoItemTitle(todoItem.id, index)"><b-icon-pencil></b-icon-pencil></span>
@@ -495,7 +495,13 @@ export default {
     line-height: 24px;
 }
 
-[data-cy="todo-item-title"].done {
+.todo-item-title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+}
+
+.todo-item-title.done {
     color: #C7C7C7;
     text-decoration-line: line-through;
 }
