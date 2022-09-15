@@ -21,6 +21,30 @@ a {
   text-decoration: none !important;
 }
 
+.priority-indicator {
+  border-radius: 50%;
+  content: '';
+  display: inline-block;
+  margin-right: 19px;
+  height: 14px;
+  width: 14px;
+}
+.priority-indicator.very-high {
+  background: #ED4C5C;
+}
+.priority-indicator.high {
+  background: #F8A541;
+}
+.priority-indicator.normal {
+  background: #00A790;
+}
+.priority-indicator.low {
+  background: #428BC1;
+}
+.priority-indicator.very-low {
+  background: #8942C1;
+}
+
 @media (min-width: 1200px) {
 .container {
   max-width: 1140px !important;

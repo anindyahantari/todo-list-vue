@@ -151,13 +151,14 @@ export default {
 }
 
 .card {
+    border: unset;
     border-radius: 12px;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
     margin-bottom: 26px;
     max-width: 235px;
     padding: 22px 26px 25px 27px;
-    width: 100;
+    width: 100%;
 }
 
 .card-body {
