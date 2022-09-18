@@ -491,6 +491,10 @@ export default {
     border-radius: unset !important;
 }
 
+[data-cy="modal-add-priority-dropdown"] >>> ul.dropdown-menu {
+    display: block;
+}
+
 [data-cy="modal-add-priority-item"],
 .priority-indicator >>> .dropdown-item {
     color: #111111;
