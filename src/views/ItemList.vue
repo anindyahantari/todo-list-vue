@@ -15,7 +15,7 @@
                     v-model="activity.title"
                     v-if="isEditable"
                     data-cy="todo-title-edit-input" 
-                    @keydown.enter="editActivityTitle" 
+                    v-on-clickaway="editActivityTitle" 
                 ></b-form-input>
                 <h4 v-else data-cy="todo-title" @click.prevent="editActivityTitle">
                     {{ activity.title }} 
@@ -148,26 +148,26 @@
                 <b-dropdown id="dropdown" data-cy="modal-add-priority-dropdown" variant="none" class="m-md-2 d-block">
                     <template #button-content>
                         <span class="priority-indicator" :class="priority.value"></span>
-                        <span data-cy="modal-add-priority-item"> {{ priority.text }}</span>
+                        <span>{{ priority.text }}</span>
                     </template>
 
-                    <b-dropdown-item data-cy="modal-add-priority-item-1" @click="getPriorityValue('very-high', 'Very High')">
+                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('very-high', 'Very High')">
                         <span class="priority-indicator very-high"></span>
                         Very High
                     </b-dropdown-item>
-                    <b-dropdown-item  data-cy="modal-add-priority-item-2" @click="getPriorityValue('high', 'High')">
+                    <b-dropdown-item  data-cy="modal-add-priority-item" @click="getPriorityValue('high', 'High')">
                         <span class="priority-indicator high"></span>
                         High
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="modal-add-priority-item-3" @click="getPriorityValue('normal', 'Medium')">
+                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('normal', 'Medium')">
                         <span class="priority-indicator normal"></span>
                         Medium
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="modal-add-priority-item-4" @click="getPriorityValue('low', 'Low')">
+                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('low', 'Low')">
                         <span class="priority-indicator low"></span>
                         Low
                     </b-dropdown-item>
-                    <b-dropdown-item data-cy="modal-add-priority-item-5" @click="getPriorityValue('very-low', 'Very Low')">
+                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('very-low', 'Very Low')">
                         <span class="priority-indicator very-low"></span>
                         Very Low
                     </b-dropdown-item>
@@ -189,12 +189,16 @@
 
 <script>
 
-import axios from 'axios'
+import axios from "axios"
+import { directive as onClickaway } from 'vue-clickaway';
 import InformationModal from "../components/InformationModal.vue"
 
 export default {
     components: {
         InformationModal
+    },
+    directives: {
+        onClickaway: onClickaway,
     },
     data() {
         return {
@@ -357,8 +361,6 @@ export default {
                     return 1;
                 return 0;
             })
-
-            console.log(this.todoItems);
             
             return this.todoItems;
         },
