@@ -100,7 +100,7 @@
                                     data-cy="todo-item-title-edit-input" 
                                     @keydown.enter="editTodoItemTitle(todoItem.id, index)" 
                                 ></b-form-input>
-                                <p v-else class="todo-item-title" data-cy="todo-title" :class="{ done: !todoItem.is_active }" @click.prevent="editTodoItemTitle(todoItem.id, index)">{{ todoItem.title }}</p>
+                                <p v-else class="todo-item-title" data-cy="todo-item-title" :class="{ done: !todoItem.is_active }" @click.prevent="editTodoItemTitle(todoItem.id, index)">{{ todoItem.title }}</p>
                                 <span data-cy="todo-title-edit-button"  @click.prevent="editTodoItemTitle(todoItem.id, index)"><b-icon-pencil></b-icon-pencil></span>
                                 <!-- END OF EDITABLE TODO ITEM TITLE -->
 
