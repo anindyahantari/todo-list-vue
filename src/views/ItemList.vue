@@ -151,26 +151,26 @@
                         <span>{{ priority.text }}</span>
                     </template>
 
-                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('very-high', 'Very High')">
+                    <b-dropdown-item-button data-cy="modal-add-priority-item" @click="getPriorityValue('very-high', 'Very High')">
                         <span class="priority-indicator very-high"></span>
                         Very High
-                    </b-dropdown-item>
-                    <b-dropdown-item  data-cy="modal-add-priority-item" @click="getPriorityValue('high', 'High')">
+                    </b-dropdown-item-button>
+                    <b-dropdown-item-button  data-cy="modal-add-priority-item" @click="getPriorityValue('high', 'High')">
                         <span class="priority-indicator high"></span>
                         High
-                    </b-dropdown-item>
-                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('normal', 'Medium')">
+                    </b-dropdown-item-button>
+                    <b-dropdown-item-button data-cy="modal-add-priority-item" @click="getPriorityValue('normal', 'Medium')">
                         <span class="priority-indicator normal"></span>
                         Medium
-                    </b-dropdown-item>
-                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('low', 'Low')">
+                    </b-dropdown-item-button>
+                    <b-dropdown-item-button data-cy="modal-add-priority-item" @click="getPriorityValue('low', 'Low')">
                         <span class="priority-indicator low"></span>
                         Low
-                    </b-dropdown-item>
-                    <b-dropdown-item data-cy="modal-add-priority-item" @click="getPriorityValue('very-low', 'Very Low')">
+                    </b-dropdown-item-button>
+                    <b-dropdown-item-button data-cy="modal-add-priority-item" @click="getPriorityValue('very-low', 'Very Low')">
                         <span class="priority-indicator very-low"></span>
                         Very Low
-                    </b-dropdown-item>
+                    </b-dropdown-item-button>
                 </b-dropdown>
 
             </form>
@@ -485,6 +485,10 @@ export default {
 [data-cy="modal-add-priority-dropdown"] >>> .dropdown-toggle {
     border: 1px solid #E5E5E5 !important;
     border-radius: 6px !important;
+}
+
+[data-cy="modal-add-priority-dropdown"] >>> .dropdown-item:hover {
+    border-radius: unset !important;
 }
 
 [data-cy="modal-add-priority-item"],
